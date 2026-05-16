@@ -2,47 +2,79 @@ const mongoose = require("mongoose");
 
 const orderSchema = new mongoose.Schema(
   {
-    user: { type: mongoose.Schema.Types.ObjectId, ref: "User", required: true },
+    user: {
+      type: mongoose.Schema.Types.ObjectId,
+      ref: "User",
+    },
 
     items: [
-      {
-        product: { type: mongoose.Schema.Types.ObjectId, ref: "Product", required: true },
-        title: String,                  // Product Title at time of order
-        price: Number,                  // Price at time of order
-        discountPrice: Number,          // Discounted price if any
-        quantity: Number,               // Quantity ordered
-        variant: {                      // Optional variant info
-          size: String,
-          color: String
-        },
-        thumbnail: String               // Product thumbnail
-      }
-    ],
-
-    totalAmount: Number,                // Total order amount
-    paymentMethod: { 
-      type: String, 
-      enum: ["COD", "Online"], 
-      required: true 
-    },
-    status: { 
-      type: String, 
-      enum: ["Pending", "Confirmed", "Shipped", "Delivered"], 
-      default: "Pending" 
+  {
+    product: {
+      type: mongoose.Schema.Types.ObjectId,
+      ref: "Product",
     },
 
-    shippingAddress: {
-      name: String,
-      phone: String,
-      addressLine1: String,
-      addressLine2: String,
-      city: String,
-      state: String,
-      postalCode: String,
-      country: String
-    }
+    title: String,
+
+    price: Number,
+
+    discountPrice: Number,
+
+    thumbnail: String,
+
+    quantity: {
+      type: Number,
+      default: 1,
+    },
+
+    variant: {
+      size: String,
+      color: String,
+    },
   },
-  { timestamps: true }
+],
+
+    totalPrice: {
+      type: Number,
+      required: true,
+    },
+
+    paymentMethod: {
+      type: String,
+      default: "COD",
+    },
+
+    status: {
+      type: String,
+      default: "Pending",
+    },
+    shippingAddress: {
+
+  fullName: {
+    type: String,
+    required: true,
+  },
+
+  phone: {
+    type: String,
+    required: true,
+  },
+
+  address: {
+    type: String,
+    required: true,
+  },
+
+  city: String,
+
+  postalCode: String,
+
+  note: String,
+},
+  },
+  {
+    timestamps: true,
+  }
 );
 
 module.exports = mongoose.model("Order", orderSchema);

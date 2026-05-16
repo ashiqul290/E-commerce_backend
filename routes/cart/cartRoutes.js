@@ -1,8 +1,10 @@
-const { orderAddController, orderCodController } = require("../../controllers/order.controller");
+const { orderCodController, addtoController, getAllOrdersController } = require("../../controllers/order.controller");
 
 const cart = require("express").Router();
 
-cart.post("/addcart", orderAddController);
-cart.post("/orderCod", orderCodController);
+cart.post("/addcart", addtoController);
+cart.post("/ordercod", orderCodController);
+
+cart.get("/allorders",getAllOrdersController)
 
 module.exports = cart;

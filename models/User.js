@@ -8,6 +8,22 @@ const userSchema = new mongoose.Schema(
     phone: String,
     address: String,
     password: String,
+    cart: {
+  type: [
+    {
+      product: {
+        type: mongoose.Schema.Types.ObjectId,
+        ref: "Product",
+      },
+      quantity: Number,
+      variant: {
+        size: String,
+        color: String,
+      },
+    },
+  ],
+  default: [],
+},
     role: { type: String, default: "user" }
   },
   { timestamps: true }
