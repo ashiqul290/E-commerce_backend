@@ -206,3 +206,7 @@ exports.getAllOrdersController = async (req, res) => {
     });
   }
 }
+
+exports.orderOnlineController = async (req, res) => {
+  res.send("order Online")
+}
